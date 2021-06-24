@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SalesDAO extends DataBaseInfo{
 
-    public List<ClientSalesDTO> salesList(){
+    public List<ClientSalesDTO> salesList(String memId){
         List<ClientSalesDTO> list = new ArrayList<ClientSalesDTO>();
 
         sql=
@@ -19,9 +19,17 @@ public class SalesDAO extends DataBaseInfo{
         " AND   PU.PURCHASE_NUM = PL.PURCHASE_NUM"+
         " AND   PL.PROD_NUM = PR.PROD_NUM";
 
+
+        if(memId != null){
+            sql += "amd mem_id = ?";
+        }
+
         getConnect();
         try {
             pstmt = conn.prepareStatement(sql);
+            if(memId != null){
+                pstmt.setString(1, memId);
+            }
             rs = pstmt.executeQuery();
             while (rs.next()){
                 ClientSalesDTO dto = new ClientSalesDTO();

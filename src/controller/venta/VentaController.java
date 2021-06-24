@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/*.vnt")
+
 public class VentaController extends HttpServlet implements Servlet {
     public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -25,6 +25,11 @@ public class VentaController extends HttpServlet implements Servlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("sales/venta.jsp");
         dispatcher.forward(request, response);
     }
+
+
+
+
+
 
 
     } //doProcess

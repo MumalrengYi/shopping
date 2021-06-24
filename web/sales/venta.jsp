@@ -12,8 +12,12 @@
     <title>Venta.jsp / 판매현황</title>
 </head>
 <body>
-고객 판매 리스트
-    <table>
+고객 판매 리스트 <br>
+<form  action="venta.vnt" method="post" name="frm" >
+    아이디 검색: <input type="text" name="memId"/> <br/>
+    <input type = "submit" value="검색" />
+</form>
+    <table border="1">
         <tr>
             <td>고객아이디</td> <td>고객명</td> <td>상품명</td> <td>수량</td> <td>판매일</td>
             <!-- [ 고객명:member , 상품명:product, 주문수량:purchase, 판매일:purchase_list ] 에 있음 -->
