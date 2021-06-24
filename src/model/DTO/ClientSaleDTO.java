@@ -2,7 +2,7 @@ package model.DTO;
 
 import java.util.Date;
 
-public class ClientSalesDTO {
+public class ClientSaleDTO {
     String memId;
     String memName;
     String memPhone;
