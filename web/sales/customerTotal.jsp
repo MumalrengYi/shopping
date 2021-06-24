@@ -29,7 +29,7 @@
 <body>
 <div id="chart_div" style="width:900px; height: 500px;"></div>
 고객별 현황 <br/>
-<table>
+<table border="1">
     <tr>
         <td>이름/아이디</td> <td>총 구매금액</td> <td>횟수</td> <td>평균금액</td>
     </tr>

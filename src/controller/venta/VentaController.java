@@ -27,15 +27,22 @@ public class VentaController extends HttpServlet
         }else if(command.equals("/userSales.vnt")) {
             UserSalesPage action = new UserSalesPage();
             action.userSales(request);
-            RequestDispatcher dispatcher =
-                    request.getRequestDispatcher("sales/userSales.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("sales/userSales.jsp");
             dispatcher.forward(request, response);
         }else if(command.equals("/customerTotal.vnt")) {
             CustomerTotalPage action = new CustomerTotalPage();
             action.customerTotal(request);
-            RequestDispatcher dispatcher =
-                    request.getRequestDispatcher("sales/customerTotal.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("sales/customerTotal.jsp");
             dispatcher.forward(request, response);
+        }else if(command.equals("/createDelivery.vnt")){
+            CreateDeliveryPage action = new CreateDeliveryPage();
+            action.excute(request);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("sales/deliveryForm.jsp");
+            dispatcher.forward(request, response);
+        }else if(command.equals("/deliveryOk.vnt")){
+            DeliveryOkPage action = new DeliveryOkPage();
+            action.execute(request);
+
         }
     }
     @Override
