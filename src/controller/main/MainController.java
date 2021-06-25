@@ -28,12 +28,12 @@ public class MainController extends HttpServlet
 		if(command.equals("/main.sm")) {
 			GoodsListPage action = new GoodsListPage();
 			action.goodsList(request);
-			RequestDispatcher dispatcher =
-					request.getRequestDispatcher("main/home.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("main/home.jsp");
 			dispatcher.forward(request, response);
-		}else if(command.equals("/login.sm")) {
+
+		}else if(command.equals("/login.sm")) { //로그인을 위해..
 			LoginPage action = new LoginPage();
-			action.login(request);
+			action.login(request,response);
 			response.sendRedirect("main.sm");
 		}else if(command.equals("/logout.sm")) {
 			HttpSession session = request.getSession();
