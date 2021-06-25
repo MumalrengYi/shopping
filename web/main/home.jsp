@@ -15,7 +15,8 @@
 		<table border = 1>
 			<tr><td colspan="3">
 				<input type="checkbox" name="idStore" value="store" <c:if test="${isId != null}"> checked </c:if> />
-				아이디저장 | 자동로그인</td></tr>
+				아이디저장 |
+				<input type="checkbox" name="autologin" value="auto" />자동로그인</td></tr>
 			<tr><td>아이디</td>
 				<td><input type="text" name="userId" value="${isId}"/><span>${userFail }</span></td>
 				<td rowspan="2">

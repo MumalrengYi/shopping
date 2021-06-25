@@ -5,10 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 import controller.goods.GoodsListPage;
 
@@ -35,7 +32,13 @@ public class MainController extends HttpServlet
 			LoginPage action = new LoginPage();
 			action.login(request,response);
 			response.sendRedirect("main.sm");
+
 		}else if(command.equals("/logout.sm")) {
+			//cookie날리기
+			Cookie cookie = new Cookie("autoLogin","");
+			cookie.setPath("/");
+			cookie.setMaxAge(0);
+
 			HttpSession session = request.getSession();
 			session.invalidate();
 			response.sendRedirect("main.sm");

@@ -25,6 +25,16 @@ public class LoginPage {
 				/// 웹브라우저를 닫기 전까지 사용할 수 있도록 session에 저장
 				session.setAttribute("authInfo", authInfo);
 
+				//자동로그인에 대한 체크박스
+				String autologin = request.getParameter("autologin");
+				if(autologin != null && autologin.equals("auto")){
+					Cookie cookie = new Cookie("autoLogin",userId);
+					cookie.setPath("/");
+					cookie.setMaxAge(60*60*24*30);
+
+
+				}
+
 				//ID저장파트 추가
 				//Cookie 만들어 달라 요청
 				String idStore = request.getParameter("idStore");
