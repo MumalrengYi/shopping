@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class MemberController extends HttpServlet 
-	implements Servlet{
-	private void doProcess(HttpServletRequest request, 
-			HttpServletResponse response) 
-					throws ServletException, IOException{
+public class MemberController extends HttpServlet
+		implements Servlet{
+	private void doProcess(HttpServletRequest request,
+						   HttpServletResponse response)
+			throws ServletException, IOException{
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
 		if(command.equals("/memAgree.mem")) {
-			RequestDispatcher dispatcher = 
+			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("member/agree.jsp");
 			dispatcher.forward(request, response);
 		}else if(command.equals("/memRegist.mem")) {
@@ -32,7 +32,7 @@ public class MemberController extends HttpServlet
 			response.sendRedirect("main.sm");
 		}else if(command.equals("/memList.mem")) {
 			MemberListPage action =	new MemberListPage();
-			action.memList(request);			
+			action.memList(request);
 			response.setCharacterEncoding("utf-8");
 			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("member/memberList.jsp");
@@ -47,7 +47,7 @@ public class MemberController extends HttpServlet
 		}else if(command.equals("/memMod.mem")) {
 			MemberInfoPage action = new MemberInfoPage();
 			action.memInfo(request);
-			RequestDispatcher dispatcher = 
+			RequestDispatcher dispatcher =
 					request.getRequestDispatcher(
 							"member/memberModify.jsp");
 			dispatcher.forward(request, response);
@@ -60,13 +60,13 @@ public class MemberController extends HttpServlet
 			action.memDel(request);
 			response.sendRedirect("memList.mem");
 		}else if(command.equals("/myPage.mem")) {
-			RequestDispatcher dispatcher = 
+			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("member/memMyPage.jsp");
 			dispatcher.forward(request, response);
 		}else if(command.equals("/memDetail.mem")) {
 			MemberDetailPage action = new MemberDetailPage();
 			action.memberDetail(request);
-			RequestDispatcher dispatcher = 
+			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("member/memDetail.jsp");
 			dispatcher.forward(request, response);
 		}else if(command.equals("/memSujung.mem")) {
@@ -84,7 +84,7 @@ public class MemberController extends HttpServlet
 				response.sendRedirect("memSujung.mem");
 			}
 		}else if(command.equals("/memOut.mem")) {
-			RequestDispatcher dispatcher = 
+			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("member/outPw.jsp");
 			dispatcher.forward(request, response);
 		}else if(command.equals("/memOutOk.mem")) {
@@ -97,29 +97,39 @@ public class MemberController extends HttpServlet
 			}
 		}else if(command.equals("/memPwChange.mem")){
 			RequestDispatcher dispatcher =
-				request.getRequestDispatcher("member/pwChang.jsp");
+					request.getRequestDispatcher("member/pwChang.jsp");
 			dispatcher.forward(request, response);
 		}else if(command.equals("/pwChangeOk.mem")) {
 			MemberPwConfirmPage action = new MemberPwConfirmPage();
 			String path = action.pwConfirm(request);
 			RequestDispatcher dispatcher =
-						request.getRequestDispatcher(path);
-			dispatcher.forward(request, response);			
+					request.getRequestDispatcher(path);
+			dispatcher.forward(request, response);
 		}else if(command.equals("/ChangePw.mem")) {
 			MemberPwChangePage action = new MemberPwChangePage();
 			int i = action.pwChange(request);
 			if(i == 1) {
 				response.sendRedirect("main.sm");
 			}else {
-				RequestDispatcher dispatcher = 
+				RequestDispatcher dispatcher =
 						request.getRequestDispatcher("member/pwChang.jsp");
 				dispatcher.forward(request, response);
 			}
+		}else if(command.equals("/idSearch.mem")) {
+			RequestDispatcher dispatcher =
+					request.getRequestDispatcher("member/idSerch.jsp");
+			dispatcher.forward(request, response);
+		}else if(command.equals("/idFind.mem")) {
+			IdSearchPage action = new IdSearchPage();
+			action.idFind(request);
+			RequestDispatcher dispatcher =
+					request.getRequestDispatcher("member/idFind.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 	@Override
-	protected void doGet(HttpServletRequest req, 
-				HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req,
+						 HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doProcess(req,resp);
 	}

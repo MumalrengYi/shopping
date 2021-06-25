@@ -1,6 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,24 +21,22 @@
                 series: {5: {type: 'line'}}
             };
 
-            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+            let chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
             chart.draw(data, options);
         }
     </script>
 </head>
 <body>
 <div id="chart_div" style="width:900px; height: 500px;"></div>
-고객별 현황 <br/>
-<table border="1">
-    <tr>
-        <td>이름/아이디</td> <td>총 구매금액</td> <td>횟수</td> <td>평균금액</td>
-    </tr>
-
-    <c:forEach items = "${list}" var="dto">
-        <tr>
-            <td>${dto.memName}/${dto.memId}</td>
-            <td>${dto.sumPrice}</td> <td>${dto.count}</td> <td>${dto.avg}</td>
-        </tr>
+<hr />
+고객별 현황<br />
+<table >
+    <tr><td>이름/아이디</td><td>총 구매금액</td><td>횟수</td>
+        <td>평균금액</td></tr>
+    <c:forEach items="${list }" var="dto">
+        <tr><td>${dto.memName }/${dto.memId }</td>
+            <td>${dto.sumPrice }</td><td>${dto.count }</td>
+            <td>${dto.avg }</td></tr>
     </c:forEach>
 </table>
 </body>

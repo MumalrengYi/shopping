@@ -30,23 +30,46 @@ public class MemberDAO {
 		try {
 			Class.forName(jdbcDriver);
 			conn = DriverManager.getConnection(
-					jdbcUrl,"subin","1234");
+					jdbcUrl,"subin","ORACLE");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	private void close() {
-		if(rs != null)	try {rs.close();} 
-						catch (SQLException e) {}
-		if(pstmt != null)	try {pstmt.close();} 
-						catch (SQLException e) {}
-		if(conn != null)	try {conn.close();} 
-						catch (SQLException e) {}
+		if(rs != null)	try {rs.close();}
+		catch (SQLException e) {}
+		if(pstmt != null)	try {pstmt.close();}
+		catch (SQLException e) {}
+		if(conn != null)	try {conn.close();}
+		catch (SQLException e) {}
+	}
+	public void idFind(MemberDTO dto) {
+		sql = "select mem_Id, mem_name from member "
+				+ " where mem_address = ? and mem_phone = ?"
+				+ "   and mem_email = ? ";
+		System.out.println(sql);
+		getConnect();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getMemAddress());
+			pstmt.setString(2, dto.getMemPhone());
+			pstmt.setString(3, dto.getMemEmail());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dto.setMemId(rs.getString(1));
+				dto.setMemName(rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+
 	}
 	public void pwChange(String memId, String memPw) {
 		sql = " update member "
-			+ " set mem_pw = ? "
-			+ " where mem_id = ? ";
+				+ " set mem_pw = ? "
+				+ " where mem_id = ? ";
 		getConnect();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -72,15 +95,15 @@ public class MemberDAO {
 			e.printStackTrace();
 		}finally {
 			close();
-		}				
+		}
 	}
 	public void memUpdate(MemberDTO dto) {
 		sql = " update  member "
-			+ " set  POST_NUMBER =? , MEM_ADDRESS = ? ,"
-			+ "      DETAIL_ADD = ? , MEM_EMAIL = ? ,"
-			+ "      MEM_EMAIL_CK = ?, MEM_ACCOUNT = ? ,"
-			+ "      MEM_PHONE = ?, MEM_BIRTH = ? "
-			+ " where mem_id = ?" ; 
+				+ " set  POST_NUMBER =? , MEM_ADDRESS = ? ,"
+				+ "      DETAIL_ADD = ? , MEM_EMAIL = ? ,"
+				+ "      MEM_EMAIL_CK = ?, MEM_ACCOUNT = ? ,"
+				+ "      MEM_PHONE = ?, MEM_BIRTH = ? "
+				+ " where mem_id = ?" ;
 		getConnect();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -101,13 +124,13 @@ public class MemberDAO {
 		}finally {
 			close();
 		}
-		
-		
+
+
 	}
 	public MemberDTO memDetail(String memId) {
 		MemberDTO dto = new MemberDTO();
 		sql = " select " + COLUMNS + " from member "
-			+ " where mem_id = ? ";
+				+ " where mem_id = ? ";
 		getConnect();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -133,11 +156,11 @@ public class MemberDAO {
 		}
 		return dto;
 	}
-	
-	
+
+
 	public List<MemberDTO> memList(){
 		List<MemberDTO> list = new ArrayList<MemberDTO>();
-		
+
 		sql = "select " + COLUMNS + " from member";
 		getConnect();
 		try {
@@ -162,13 +185,13 @@ public class MemberDAO {
 			e.printStackTrace();
 		}finally {
 			close();
-		}		
+		}
 		return list;
 	}
-	
+
 	public void memInsert(MemberDTO dto) {
 		sql = " insert into member ( " + COLUMNS +" ) "
-			+ " values(?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ " values(?,?,?,?,?,?,?,?,?,?,?,?)";
 		getConnect();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -179,7 +202,7 @@ public class MemberDAO {
 			pstmt.setString(5, dto.getDetailAdd());
 			pstmt.setString(6, dto.getMemName());
 			pstmt.setString(7, dto.getMemPhone());
-			
+
 			long birth = dto.getMemBirth().getTime();
 			pstmt.setDate(8, new Date(birth));
 			pstmt.setString(9, dto.getMemGender());
@@ -195,9 +218,3 @@ public class MemberDAO {
 		}
 	}
 }
-
-
-
-
-
-
